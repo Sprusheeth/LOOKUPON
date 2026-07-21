@@ -1,0 +1,14 @@
+{
+  "name": "lookupon",
+  "version": "1.0.0",
+  "description": "Project Discovery & Showcase Platform",
+  "scripts": {
+    "dev": "start /B npm run dev:server && npm run dev:client",
+    "dev:client": "cd client && npm run dev",
+    "dev:server": "cd server && node index.js",
+    "install:all": "cd client && npm install && cd ../server && npm install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}
