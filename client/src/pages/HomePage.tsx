@@ -109,7 +109,7 @@ export default function HomePage() {
   const displayRecent = recent.length > 0 ? recent : (isTourActive ? [dummyProject] : []);
   const displayCreators = creators.length > 0 ? creators : (isTourActive ? [dummyCreator] : []);
 
-  const mainFeatured = featured[0] || displayTrending.find(p => p.creator?.username !== 'lookupon');
+  const mainFeatured = featured[0] || displayTrending.find(p => (p.username || (p as any).creator?.username) !== 'lookupon');
 
   const containerVariants: any = {
     hidden: { opacity: 0 },
