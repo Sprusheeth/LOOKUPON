@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, TrendingUp, Users, Rocket, Star, ChevronRight, Code, Layout, Globe, Cpu, Blocks, Cpu as CpuIcon, Database, Server } from 'lucide-react';
 import { motion } from 'framer-motion';
-import api from '../api/client';
+import api, { API_BASE_URL } from '../api/client';
 import type { Project, User } from '../store/useAppStore';
 import { useAppStore } from '../store/useAppStore';
 import ProjectCard from '../components/ProjectCard';
@@ -167,7 +167,7 @@ export default function HomePage() {
                   <Rocket size={18} /> Launch a Project
                 </Link>
               ) : (
-                <a href="http://localhost:3001/auth/github" className="btn btn-primary btn-lg">
+                <a href={`${API_BASE_URL}/auth/github`} className="btn btn-primary btn-lg">
                   Continue with GitHub
                 </a>
               )}
@@ -457,7 +457,7 @@ export default function HomePage() {
                     Join the platform where elite developers showcase their products to the world.
                   </p>
                   <div className="cta-actions">
-                    <a href="http://localhost:3001/auth/github" className="btn btn-primary btn-lg">
+                    <a href={`${API_BASE_URL}/auth/github`} className="btn btn-primary btn-lg">
                       Join via GitHub
                     </a>
                     <Link to="/explore" className="btn btn-secondary btn-lg">

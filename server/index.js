@@ -44,56 +44,60 @@ app.use(express.urlencoded({ extended: true }));
 const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 500 });
 app.use(limiter);
 
+const apiRouter = express.Router();
+
 // ─── Auth Routes ─────────────────────────────────────────────────────────────
-app.post('/auth/register', authService.register);
-app.get('/auth/check-username', authService.checkUsername);
-app.get('/auth/check-email', authService.checkEmail);
-app.post('/auth/login', authService.login);
-app.get('/auth/github', authService.githubLogin);
-app.get('/auth/github/callback', authService.githubCallback);
-app.get('/auth/me', authMiddleware, authService.getMe);
-app.put('/auth/me', authMiddleware, authService.updateProfile);
+apiRouter.post('/auth/register', authService.register);
+apiRouter.get('/auth/check-username', authService.checkUsername);
+apiRouter.get('/auth/check-email', authService.checkEmail);
+apiRouter.post('/auth/login', authService.login);
+apiRouter.get('/auth/github', authService.githubLogin);
+apiRouter.get('/auth/github/callback', authService.githubCallback);
+apiRouter.get('/auth/me', authMiddleware, authService.getMe);
+apiRouter.put('/auth/me', authMiddleware, authService.updateProfile);
 
 // ─── GitHub Routes ────────────────────────────────────────────────────────────
-app.get('/github/repos', authMiddleware, githubService.getUserRepos);
-app.post('/github/import', authMiddleware, githubService.importRepo);
+apiRouter.get('/github/repos', authMiddleware, githubService.getUserRepos);
+apiRouter.post('/github/import', authMiddleware, githubService.importRepo);
 
 // ─── AI Routes ────────────────────────────────────────────────────────────────
-app.post('/ai/analyze', authMiddleware, aiService.analyzeProject);
-app.post('/ai/analyze-url', authMiddleware, aiService.analyzeFromUrl);
+apiRouter.post('/ai/analyze', authMiddleware, aiService.analyzeProject);
+apiRouter.post('/ai/analyze-url', authMiddleware, aiService.analyzeFromUrl);
 
 // ─── Project Routes ───────────────────────────────────────────────────────────
-app.get('/projects', optionalAuth, projectsService.getProjects);
-app.get('/projects/trending', optionalAuth, projectsService.getTrending);
-app.get('/projects/featured', optionalAuth, projectsService.getFeatured);
-app.get('/projects/:id', optionalAuth, projectsService.getProject);
-app.post('/projects', authMiddleware, projectsService.createProject);
-app.put('/projects/:id', authMiddleware, projectsService.updateProject);
-app.delete('/projects/:id', authMiddleware, projectsService.deleteProject);
+apiRouter.get('/projects', optionalAuth, projectsService.getProjects);
+apiRouter.get('/projects/trending', optionalAuth, projectsService.getTrending);
+apiRouter.get('/projects/featured', optionalAuth, projectsService.getFeatured);
+apiRouter.get('/projects/:id', optionalAuth, projectsService.getProject);
+apiRouter.post('/projects', authMiddleware, projectsService.createProject);
+apiRouter.put('/projects/:id', authMiddleware, projectsService.updateProject);
+apiRouter.delete('/projects/:id', authMiddleware, projectsService.deleteProject);
 
 // ─── User Routes ──────────────────────────────────────────────────────────────
-app.get('/users', optionalAuth, socialService.getUsers);
-app.get('/users/:username', optionalAuth, socialService.getUser);
-app.get('/users/:username/projects', optionalAuth, projectsService.getUserProjects);
-app.get('/users/:username/collections', optionalAuth, socialService.getCollections);
+apiRouter.get('/users', optionalAuth, socialService.getUsers);
+apiRouter.get('/users/:username', optionalAuth, socialService.getUser);
+apiRouter.get('/users/:username/projects', optionalAuth, projectsService.getUserProjects);
+apiRouter.get('/users/:username/collections', optionalAuth, socialService.getCollections);
 
 // ─── Social Routes ────────────────────────────────────────────────────────────
-app.post('/projects/:projectId/like', authMiddleware, socialService.toggleLike);
-app.post('/projects/:projectId/bookmark', authMiddleware, socialService.toggleBookmark);
-app.post('/projects/:projectId/rate', authMiddleware, socialService.rateProject);
-app.get('/projects/:projectId/comments', optionalAuth, socialService.getComments);
-app.post('/projects/:projectId/comments', authMiddleware, socialService.addComment);
-app.post('/comments/:commentId/upvote', authMiddleware, socialService.upvoteComment);
+apiRouter.post('/projects/:projectId/like', authMiddleware, socialService.toggleLike);
+apiRouter.post('/projects/:projectId/bookmark', authMiddleware, socialService.toggleBookmark);
+apiRouter.post('/projects/:projectId/rate', authMiddleware, socialService.rateProject);
+apiRouter.get('/projects/:projectId/comments', optionalAuth, socialService.getComments);
+apiRouter.post('/projects/:projectId/comments', authMiddleware, socialService.addComment);
+apiRouter.post('/comments/:commentId/upvote', authMiddleware, socialService.upvoteComment);
 
-app.post('/users/:userId/follow', authMiddleware, socialService.toggleFollow);
-app.get('/users/:userId/following', authMiddleware, socialService.isFollowing);
+apiRouter.post('/users/:userId/follow', authMiddleware, socialService.toggleFollow);
+apiRouter.get('/users/:userId/following', authMiddleware, socialService.isFollowing);
 
-app.get('/bookmarks', authMiddleware, socialService.getBookmarks);
-app.get('/notifications', authMiddleware, socialService.getNotifications);
-app.post('/notifications/read', authMiddleware, socialService.markNotificationsRead);
+apiRouter.get('/bookmarks', authMiddleware, socialService.getBookmarks);
+apiRouter.get('/notifications', authMiddleware, socialService.getNotifications);
+apiRouter.post('/notifications/read', authMiddleware, socialService.markNotificationsRead);
 
-app.post('/collections', authMiddleware, socialService.createCollection);
-app.post('/collections/:collectionId/projects/:projectId', authMiddleware, socialService.addToCollection);
+apiRouter.post('/collections', authMiddleware, socialService.createCollection);
+apiRouter.post('/collections/:collectionId/projects/:projectId', authMiddleware, socialService.addToCollection);
+
+app.use('/api', apiRouter);
 
 // ─── Health ───────────────────────────────────────────────────────────────────
 app.get('/health', (_, res) => res.json({ status: 'ok', time: new Date().toISOString() }));

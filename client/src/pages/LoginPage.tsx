@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Sparkles, Star, Users, Globe, Mail, Lock, User as UserIcon, ArrowRight } from 'lucide-react';
+import { Sparkles, Star, Users, Globe, Mail, Lock, User as UserIcon, ArrowRight, Rocket, AlertCircle, Eye, EyeOff, Loader2 } from 'lucide-react';
 import { GithubIcon } from '../components/GithubIcon';
 import { useAppStore } from '../store/useAppStore';
-import api from '../api/client';
+import api, { API_BASE_URL } from '../api/client';
 import './LoginPage.css';
 
 const FEATURES = [
@@ -313,7 +313,7 @@ export default function LoginPage() {
 
             <div className="login-divider"><span>or</span></div>
 
-            <a href="http://localhost:3001/auth/github" className="btn btn-secondary btn-lg github-login-btn" style={{ width: '100%', background: 'var(--bg-secondary)', border: '1px solid var(--border)' }}>
+            <a href={`${API_BASE_URL}/auth/github`} className="btn btn-secondary btn-lg github-login-btn" style={{ width: '100%', background: 'var(--bg-secondary)', border: '1px solid var(--border)' }}>
               <GithubIcon size={20} />
               Continue with GitHub
             </a>

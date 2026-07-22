@@ -5,7 +5,7 @@ const { generateToken } = require('../middleware/auth');
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
-const GITHUB_CALLBACK_URL = process.env.GITHUB_CALLBACK_URL || 'http://localhost:3001/auth/github/callback';
+const GITHUB_CALLBACK_URL = process.env.GITHUB_CALLBACK_URL || 'http://localhost:3001/api/auth/github/callback';
 const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
 
 async function register(req, res) {

@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Lock, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAppStore } from '../store/useAppStore';
+import { API_BASE_URL } from '../api/client';
 import { GithubIcon } from './GithubIcon';
 import './AuthModal.css';
 
@@ -44,7 +45,7 @@ export default function AuthModal() {
           </div>
           
           <div className="auth-modal-actions">
-            <a href="http://localhost:3001/auth/github" className="btn btn-primary auth-modal-btn">
+            <a href={`${API_BASE_URL}/auth/github`} className="btn btn-primary auth-modal-btn">
               <GithubIcon size={18} /> Continue with GitHub
             </a>
             <div className="auth-modal-divider">

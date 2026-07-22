@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { GithubIcon } from '../components/GithubIcon';
 import { useAppStore } from '../store/useAppStore';
 import { ChevronRight, Sparkles, CheckCircle2, User, Globe, MapPin, AlignLeft, Briefcase, Link as LinkIcon, Download } from 'lucide-react';
-import api from '../api/client';
+import api, { API_BASE_URL } from '../api/client';
 import './OnboardingPage.css';
 
 const INTERESTS = [
@@ -82,7 +82,7 @@ export default function OnboardingPage() {
               <p>Import your repositories with one click and showcase your open source contributions.</p>
               
               <div className="onboarding-actions">
-                <a href="http://localhost:3001/auth/github?import=true" className="btn btn-primary btn-lg">
+                <a href={`${API_BASE_URL}/auth/github?import=true`} className="btn btn-primary btn-lg">
                   <GithubIcon size={18} /> Connect GitHub
                 </a>
                 <button className="btn btn-secondary btn-lg" onClick={handleNext}>Skip for now</button>

@@ -18,7 +18,7 @@ async function generateSitemap() {
   ];
 
   try {
-    const res = await fetch(`${API_URL}/projects?limit=100&sort=trending`);
+    const res = await fetch(`${API_URL}/api/projects?limit=100&sort=trending`);
     if (res.ok) {
       const data = await res.json();
       data.projects?.forEach(project => {
