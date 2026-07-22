@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useSearchParams } from 'react-router-dom';
 import { Search, SlidersHorizontal, X, ChevronDown } from 'lucide-react';
 import api from '../api/client';
@@ -79,7 +80,12 @@ export default function ExplorePage() {
   };
 
   return (
-    <div className="explore-page">
+    <div className="explore-page" style={{ paddingTop: 'calc(var(--nav-height) + 1rem)' }}>
+      <Helmet>
+        <title>Browse Projects | Lookupon</title>
+        <meta name="description" content="Explore thousands of developer projects, from open source tools to indie hacking products." />
+        <link rel="canonical" href="https://lookupon.vercel.app/explore" />
+      </Helmet>
       {/* Header */}
       <div className="explore-header">
         <div className="container">

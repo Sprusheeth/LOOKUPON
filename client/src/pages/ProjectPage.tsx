@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import {
   Heart, Bookmark, Star, Eye, ExternalLink, MessageSquare,
@@ -157,6 +158,13 @@ export default function ProjectPage() {
 
   return (
     <div className="project-page">
+      <Helmet>
+        <title>{project.title} | Lookupon</title>
+        <meta name="description" content={project.tagline || project.description?.slice(0, 160) || `Check out ${project.title} on Lookupon.`} />
+        <link rel="canonical" href={`https://lookupon.vercel.app/projects/${project.id}`} />
+        <meta property="og:title" content={`${project.title} | Lookupon`} />
+        {project.thumbnail_url && <meta property="og:image" content={project.thumbnail_url} />}
+      </Helmet>
       {/* Back nav */}
       <div className="project-page-top">
         <div className="container">

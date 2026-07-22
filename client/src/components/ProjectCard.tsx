@@ -79,7 +79,7 @@ export default function ProjectCard({ project, onLikeChange }: Props) {
       {/* Thumbnail */}
       <div className="project-card-thumb">
         {thumbnail ? (
-          <img src={thumbnail} alt={project.title} loading="lazy" />
+          <img src={thumbnail} alt={project.title} loading="lazy" decoding="async" />
         ) : (
           <div className="project-card-thumb-placeholder">
             <span>{categoryIcon}</span>
@@ -87,11 +87,11 @@ export default function ProjectCard({ project, onLikeChange }: Props) {
         )}
         <div className="project-card-thumb-overlay">
           <div className="project-card-actions">
-            <button className={`card-action-btn ${liked ? 'active-like' : ''}`} onClick={handleLike}>
+            <button className={`card-action-btn ${liked ? 'active-like' : ''}`} onClick={handleLike} aria-label={liked ? "Unlike project" : "Like project"}>
               <Heart size={15} fill={liked ? 'currentColor' : 'none'} />
               <span>{likesCount}</span>
             </button>
-            <button className={`card-action-btn ${bookmarked ? 'active-bookmark' : ''}`} onClick={handleBookmark}>
+            <button className={`card-action-btn ${bookmarked ? 'active-bookmark' : ''}`} onClick={handleBookmark} aria-label={bookmarked ? "Remove bookmark" : "Bookmark project"}>
               <Bookmark size={15} fill={bookmarked ? 'currentColor' : 'none'} />
             </button>
           </div>
@@ -138,7 +138,7 @@ export default function ProjectCard({ project, onLikeChange }: Props) {
         <div className="project-card-footer">
           <div className="project-author">
             {project.author_avatar && (
-              <img src={project.author_avatar} alt={project.author_name} className="avatar avatar-sm" />
+              <img src={project.author_avatar} alt={`${project.author_name}'s avatar`} className="avatar avatar-sm" loading="lazy" decoding="async" />
             )}
             <span className="author-name">{project.author_name || project.username}</span>
           </div>

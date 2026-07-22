@@ -1,21 +1,22 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { useEffect, ReactNode } from 'react';
-import { Rocket } from 'lucide-react';
+import { useEffect, ReactNode, lazy, Suspense } from 'react';
+import { Rocket, Loader2 } from 'lucide-react';
+import { HelmetProvider } from 'react-helmet-async';
 import Navbar from './components/Navbar';
 import ToastContainer from './components/ToastContainer';
 import AuthModal from './components/AuthModal';
-import HomePage from './pages/HomePage';
-import ExplorePage from './pages/ExplorePage';
-import ProjectPage from './pages/ProjectPage';
-import ProfilePage from './pages/ProfilePage';
-import DashboardPage from './pages/DashboardPage';
-import SettingsPage from './pages/SettingsPage';
-import CreateProjectPage from './pages/CreateProjectPage';
-import LoginPage from './pages/LoginPage';
-import ForgotPasswordPage from './pages/ForgotPasswordPage';
-import AuthCallbackPage from './pages/AuthCallbackPage';
-import CreatorsPage from './pages/CreatorsPage';
-import OnboardingPage from './pages/OnboardingPage';
+const HomePage = lazy(() => import('./pages/HomePage'));
+const ExplorePage = lazy(() => import('./pages/ExplorePage'));
+const ProjectPage = lazy(() => import('./pages/ProjectPage'));
+const ProfilePage = lazy(() => import('./pages/ProfilePage'));
+const DashboardPage = lazy(() => import('./pages/DashboardPage'));
+const SettingsPage = lazy(() => import('./pages/SettingsPage'));
+const CreateProjectPage = lazy(() => import('./pages/CreateProjectPage'));
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage'));
+const AuthCallbackPage = lazy(() => import('./pages/AuthCallbackPage'));
+const CreatorsPage = lazy(() => import('./pages/CreatorsPage'));
+const OnboardingPage = lazy(() => import('./pages/OnboardingPage'));
 import { ErrorBoundary } from './components/ErrorBoundary';
 import GuidedTour from './components/GuidedTour';
 import { useAppStore } from './store/useAppStore';
@@ -79,38 +80,42 @@ export default function App() {
   }, [theme]);
 
   return (
-    <TourProvider>
-      <BrowserRouter>
-        <div className="app">
-          <Navbar />
-          <ErrorBoundary>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/explore" element={<ExplorePage />} />
-              <Route path="/projects/:id" element={<ProjectPage />} />
-              <Route path="/profile/:username" element={<ProfilePage />} />
-              <Route path="/creators" element={<CreatorsPage />} />
-              <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
-              <Route path="/dashboard/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
-              <Route path="/dashboard/create" element={<ProtectedRoute><CreateProjectPage /></ProtectedRoute>} />
-              <Route path="/dashboard/edit/:id" element={<ProtectedRoute><CreateProjectPage /></ProtectedRoute>} />
-              <Route path="/bookmarks" element={<ProtectedRoute><BookmarksPage /></ProtectedRoute>} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-              <Route path="/auth/callback" element={<AuthCallbackPage />} />
-              <Route path="/onboarding" element={
-                <ProtectedRoute>
-                  <OnboardingPage />
-                </ProtectedRoute>
-              } />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </ErrorBoundary>
-          <ToastContainer />
+    <HelmetProvider>
+      <TourProvider>
+        <BrowserRouter>
+          <div className="app">
+            <Navbar />
+            <ErrorBoundary>
+              <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}><Loader2 className="animate-spin" size={32} style={{ color: 'var(--accent-purple)' }} /></div>}>
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/explore" element={<ExplorePage />} />
+                  <Route path="/projects/:id" element={<ProjectPage />} />
+                  <Route path="/profile/:username" element={<ProfilePage />} />
+                  <Route path="/creators" element={<CreatorsPage />} />
+                  <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+                  <Route path="/dashboard/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
+                  <Route path="/dashboard/create" element={<ProtectedRoute><CreateProjectPage /></ProtectedRoute>} />
+                  <Route path="/dashboard/edit/:id" element={<ProtectedRoute><CreateProjectPage /></ProtectedRoute>} />
+                  <Route path="/bookmarks" element={<ProtectedRoute><BookmarksPage /></ProtectedRoute>} />
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+                  <Route path="/auth/callback" element={<AuthCallbackPage />} />
+                  <Route path="/onboarding" element={
+                    <ProtectedRoute>
+                      <OnboardingPage />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </ErrorBoundary>
+          </div>
           <AuthModal />
+          <ToastContainer />
           <GuidedTour />
-        </div>
-      </BrowserRouter>
-    </TourProvider>
+        </BrowserRouter>
+      </TourProvider>
+    </HelmetProvider>
   );
 }

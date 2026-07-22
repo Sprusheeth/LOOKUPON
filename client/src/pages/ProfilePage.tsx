@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useParams, Link } from 'react-router-dom';
 import { MapPin, Globe, Users, Heart, Eye, Plus, UserMinus, UserPlus } from 'lucide-react';
 import { GithubIcon } from '../components/GithubIcon';
@@ -76,6 +77,13 @@ export default function ProfilePage() {
 
   return (
     <div className="profile-page">
+      <Helmet>
+        <title>{profile.name} (@{profile.username}) | Lookupon</title>
+        <meta name="description" content={profile.bio || `Check out ${profile.name}'s developer projects and portfolio on Lookupon.`} />
+        <link rel="canonical" href={`https://lookupon.vercel.app/profile/${profile.username}`} />
+        <meta property="og:title" content={`${profile.name} (@${profile.username}) | Lookupon`} />
+        {profile.avatar_url && <meta property="og:image" content={profile.avatar_url} />}
+      </Helmet>
       {/* Banner */}
       <div className="profile-banner">
         <div className="profile-banner-gradient" />

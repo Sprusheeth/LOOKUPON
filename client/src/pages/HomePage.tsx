@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, TrendingUp, Users, Rocket, Star, ChevronRight, Code, Layout, Globe, Cpu, Blocks, Cpu as CpuIcon, Database, Server } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -122,6 +123,11 @@ export default function HomePage() {
 
   return (
     <>
+      <Helmet>
+        <title>Lookupon — Developer Project Sharing Platform</title>
+        <meta name="description" content="Discover amazing projects from creators around the world. Showcase your work, find collaborators, and get inspired." />
+        <link rel="canonical" href="https://lookupon.vercel.app/" />
+      </Helmet>
       {!introFinished && <IntroLoader onComplete={handleIntroComplete} />}
       
       <motion.div 
