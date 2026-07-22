@@ -80,7 +80,8 @@ export default function ProfilePage() {
       <Helmet>
         <title>{profile.name} (@{profile.username}) | Lookupon</title>
         <meta name="description" content={profile.bio || `Check out ${profile.name}'s developer projects and portfolio on Lookupon.`} />
-        <link rel="canonical" href={`https://lookupon.vercel.app/profile/${profile.username}`} />
+        <link rel="canonical" href={`https://lookupon-n4gs.vercel.app/profile/${profile.username}`} />
+        <meta property="og:site_name" content="Lookupon" />
         <meta property="og:title" content={`${profile.name} (@${profile.username}) | Lookupon`} />
         {profile.avatar_url && <meta property="og:image" content={profile.avatar_url} />}
       </Helmet>

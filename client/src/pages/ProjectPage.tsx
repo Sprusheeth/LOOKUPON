@@ -161,7 +161,8 @@ export default function ProjectPage() {
       <Helmet>
         <title>{project.title} | Lookupon</title>
         <meta name="description" content={project.tagline || project.description?.slice(0, 160) || `Check out ${project.title} on Lookupon.`} />
-        <link rel="canonical" href={`https://lookupon.vercel.app/projects/${project.id}`} />
+        <link rel="canonical" href={`https://lookupon-n4gs.vercel.app/projects/${project.id}`} />
+        <meta property="og:site_name" content="Lookupon" />
         <meta property="og:title" content={`${project.title} | Lookupon`} />
         {project.thumbnail_url && <meta property="og:image" content={project.thumbnail_url} />}
       </Helmet>

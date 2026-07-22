@@ -126,7 +126,8 @@ export default function HomePage() {
       <Helmet>
         <title>Lookupon — Developer Project Sharing Platform</title>
         <meta name="description" content="Discover amazing projects from creators around the world. Showcase your work, find collaborators, and get inspired." />
-        <link rel="canonical" href="https://lookupon.vercel.app/" />
+        <link rel="canonical" href="https://lookupon-n4gs.vercel.app/" />
+        <meta property="og:site_name" content="Lookupon" />
       </Helmet>
       {!introFinished && <IntroLoader onComplete={handleIntroComplete} />}
       

@@ -84,7 +84,8 @@ export default function ExplorePage() {
       <Helmet>
         <title>Browse Projects | Lookupon</title>
         <meta name="description" content="Explore thousands of developer projects, from open source tools to indie hacking products." />
-        <link rel="canonical" href="https://lookupon.vercel.app/explore" />
+        <link rel="canonical" href="https://lookupon-n4gs.vercel.app/explore" />
+        <meta property="og:site_name" content="Lookupon" />
       </Helmet>
       {/* Header */}
       <div className="explore-header">

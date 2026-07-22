@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const API_URL = 'https://lookupon.onrender.com';
-const DOMAIN = 'https://lookupon.vercel.app';
+const DOMAIN = 'https://lookupon-n4gs.vercel.app';
 
 async function generateSitemap() {
   const urls = [
