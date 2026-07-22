@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect, ReactNode, lazy, Suspense } from 'react';
 import { Rocket, Loader2 } from 'lucide-react';
 import { HelmetProvider } from 'react-helmet-async';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import Navbar from './components/Navbar';
 import ToastContainer from './components/ToastContainer';
 import AuthModal from './components/AuthModal';
@@ -114,6 +115,7 @@ export default function App() {
           <AuthModal />
           <ToastContainer />
           <GuidedTour />
+          <SpeedInsights />
         </BrowserRouter>
       </TourProvider>
     </HelmetProvider>

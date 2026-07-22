@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@uiw/react-heat-map": "^2.3.4",
+    "@vercel/speed-insights": "^2.0.0",
     "axios": "^1.18.1",
     "date-fns": "^4.4.0",
     "framer-motion": "^12.42.2",
