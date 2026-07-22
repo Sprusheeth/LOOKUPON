@@ -111,12 +111,12 @@ export default function GuidedTour() {
   const [showPrompt, setShowPrompt] = useState(false);
   
   useEffect(() => {
-    // Only show prompt after a short delay to let intro loader finish
-    if (!hasSeenTour) {
+    // Only show prompt after a short delay to let intro loader finish, and ONLY if the user is logged in
+    if (!hasSeenTour && user) {
       const timer = setTimeout(() => setShowPrompt(true), 4000);
       return () => clearTimeout(timer);
     }
-  }, [hasSeenTour]);
+  }, [hasSeenTour, user]);
 
   // Navigate and update spotlight rect when step changes
   useEffect(() => {
