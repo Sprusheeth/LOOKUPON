@@ -57,8 +57,7 @@ export default function Navbar() {
         <div className="nav-container">
           <div className="nav-brand">
             <Link to="/" className="nav-logo" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <img src="/logo-light.png" alt="Lookupon" className="logo-img logo-light-only" />
-              <img src="/logo-dark.png" alt="Lookupon" className="logo-img logo-dark-only" />
+              <img src="/favicon.svg" alt="Lookupon" style={{ height: '28px', width: '28px' }} />
               <span className="logo-text font-display" style={{ fontSize: '1.25rem', fontWeight: 800 }}>Lookupon</span>
             </Link>
           </div>
