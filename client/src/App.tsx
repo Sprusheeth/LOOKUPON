@@ -3,6 +3,7 @@ import { useEffect, ReactNode } from 'react';
 import { Rocket, Loader2 } from 'lucide-react';
 import { HelmetProvider } from 'react-helmet-async';
 import { SpeedInsights } from '@vercel/speed-insights/react';
+import { Analytics } from '@vercel/analytics/react';
 import Navbar from './components/Navbar';
 import ToastContainer from './components/ToastContainer';
 import AuthModal from './components/AuthModal';
@@ -113,6 +114,7 @@ export default function App() {
           <ToastContainer />
           <GuidedTour />
           <SpeedInsights />
+          <Analytics />
         </BrowserRouter>
       </TourProvider>
     </HelmetProvider>
